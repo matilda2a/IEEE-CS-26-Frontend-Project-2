@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Results summary component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution {
+      font-size: 0.6875rem;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+
+    :root {
+      --light-slate-blue: hsl(252, 100%, 67%);
+      --light-royal-blue: hsl(241, 81%, 54%);
+      --dark-gray-blue: hsl(224, 30%, 27%);
+    }
+
+    @font-face {
+      font-family: 'Hanken Grotesk';
+      src: url('./assets/fonts/HankenGrotesk-Medium.ttf');
+      font-weight: 500;
+    }
+
+    @font-face {
+      font-family: 'Hanken Grotesk';
+      src: url('./assets/fonts/HankenGrotesk-Bold.ttf');
+      font-weight: 700;
+    }
+
+    @font-face {
+      font-family: 'Hanken Grotesk';
+      src: url('./assets/fonts/HankenGrotesk-ExtraBold.ttf');
+      font-weight: 800;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Hanken Grotesk', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ecf2ff;
+      flex-direction: column;
+    }
+
+    main {
+      display: flex;
+      background: white;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 20px 30px rgba(0, 0, 0, .08);
+    }
+
+    /* LEFT SIDE */
+    .result {
+      width: 350px;
+      padding: 40px 50px;
+      text-align: center;
+      border-radius: 30px;
+      background: linear-gradient(to bottom, var(--light-slate-blue), var(--light-royal-blue));
+    }
+
+    .result h2 {
+      color: #c8c7ff;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .numbers_result {
+      width: 180px;
+      height: 180px;
+      margin: auto;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, var(--violet-blue), var(--persian-blue));
+    }
+
+    .numbers_result span:first-child {
+      font-size: 70px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .numbers_result span:last-child {
+      color: #b4b1ff;
+    }
+
+    .result h3 {
+      color: white;
+      font-size: 32px;
+      margin: 30px 0 15px;
+    }
+
+    .result p {
+      color: #c8c7ff;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    /* RIGHT SIDE */
+    .summary {
+      width: 380px;
+      padding: 40px;
+    }
+
+    .summary h2 {
+      color: var(--dark-gray-blue);
+      margin-bottom: 25px;
+    }
+
+    .items {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border-radius: 12px;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .title p {
+      font-weight: 600;
+    }
+
+    .numbers {
+      display: flex;
+      gap: 6px;
+    }
+
+    .score::-webkit-outer-spin-button,
+    .score::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .score {
+      width: 45px;
+      border: none;
+      background: transparent;
+      text-align: right;
+      font-weight: bold;
+      font-size: 16px;
+      color: #303b59;
+      outline: none;
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    .reaction {
+      background: rgba(255, 87, 87, 0.1);
+    }
+
+    .reaction p {
+      color: hsl(0, 100%, 67%);
+    }
+
+    .memory {
+      background: rgba(255, 176, 31, 0.1);
+    }
+
+    .memory p {
+      color: hsl(39, 100%, 56%);
+    }
+
+    .verbal {
+      background: rgba(0, 189, 145, 0.1);
+    }
+
+    .verbal p {
+      color: hsl(166, 100%, 37%);
+    }
+
+    .visual {
+      background: rgba(17, 37, 212, 0.1);
+    }
+
+    .visual p {
+      color: hsl(234, 85%, 45%);
+    }
+
+    .numbers p:last-child {
+      color: #999;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      border: none;
+      padding: 16px;
+      border-radius: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      background: var(--dark-gray-blue);
+      transition: .3s;
+    }
+
+    button:hover {
+      background: linear-gradient(to bottom, var(--light-slate-blue), var(--light-royal-blue));
+    }
+
+    footer {
+      position: absolute;
+      bottom: 1rem;
+      text-align: center;
+    }
+
+    @media(max-width:700px) {
+      main {
+        flex-direction: column;
+        width: 100%;
+        border-radius: 0;
+      }
+
+      .result,
+      .summary {
+        width: 100%;
+      }
+
+      .result {
+        border-radius: 0 0 30px 30px;
+      }
+
+      footer {
+        position: static;
+        padding: 1rem 0;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+
+    <div class="result">
+      <h2>Your Result</h2>
+
+      <div class="numbers_result">
+        <span>0</span>
+        <span>of 100</span>
+      </div>
+
+      <h3>--</h3>
+
+      <p>
+        You scored higher than 65% of the people who have taken these tests.
+      </p>
+    </div>
+
+
+    <div class="summary">
+      <h2>Summary</h2>
+
+      <div class="items">
+
+        <div class="item reaction">
+          <div class="title">
+            <img src="./assets/images/icon-reaction.svg" alt="">
+            <p>Reaction</p>
+          </div>
+          <div class="numbers">
+            <input type="number" class="score" min="0" max="100" placeholder="0">
+            <p>/ 100</p>
+          </div>
+        </div>
+
+        <div class="item memory">
+          <div class="title">
+            <img src="./assets/images/icon-memory.svg" alt="">
+            <p>Memory</p>
+          </div>
+          <div class="numbers">
+            <input type="number" class="score" min="0" max="100" placeholder="0">
+            <p>/ 100</p>
+          </div>
+        </div>
+
+        <div class="item verbal">
+          <div class="title">
+            <img src="./assets/images/icon-verbal.svg" alt="">
+            <p>Verbal</p>
+          </div>
+          <div class="numbers">
+            <input type="number" class="score" min="0" max="100" placeholder="0">
+            <p>/ 100</p>
+          </div>
+        </div>
+
+        <div class="item visual">
+          <div class="title">
+            <img src="./assets/images/icon-visual.svg" alt="">
+            <p>Visual</p>
+          </div>
+          <div class="numbers">
+            <input type="number" class="score" min="0" max="100" step="1" placeholder="0">
+            <p>/ 100</p>
+          </div>
+        </div>
+
+      </div>
+
+      <button>Continue</button>
+    </div>
+
+  </main>
+
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+    Coded by <a href="https://github.com/matilda2a">Matilda Ashraf</a>.
+  </footer>
+
+  <script>
+    let button = document.querySelector("button");
+    let inputs = document.querySelectorAll(".score");
+    let resultNumber = document.querySelector(".numbers_result span");
+    let resultText = document.querySelector(".result h3");
+    let circle = document.querySelector(".numbers_result");
+
+    inputs.forEach(input => {
+      input.addEventListener("input", () => {
+        let value = input.value;
+
+        value = value.replace(/[^0-9]/g, "");
+        value = Number(value);
+
+        if (value > 100) value = 100;
+        if (value < 0) value = 0;
+
+        input.value = value;
+      });
+    });
+
+    button.addEventListener("click", () => {
+      let total = 0;
+
+      inputs.forEach(input => {
+        let value = Number(input.value) || 0;
+        total += value;
+      });
+
+      let average = Math.round(total / inputs.length);
+      resultNumber.textContent = average;
+
+      if (average >= 85) {
+        resultText.textContent = "Excellent";
+        circle.style.background = "linear-gradient(to bottom, #5a6cff, #3b4eff)";
+      } else if (average >= 70) {
+        resultText.textContent = "Great";
+        circle.style.background = "linear-gradient(to bottom, #00c853, #009624)";
+      } else if (average >= 50) {
+        resultText.textContent = "Good";
+        circle.style.background = "linear-gradient(to bottom, #ffb300, #ff8f00)";
+      } else {
+        resultText.textContent = "Bad";
+        circle.style.background = "linear-gradient(to bottom, #ff5252, #d50000)";
+      }
+    });
+
+    window.addEventListener("load", () => {
+      inputs.forEach(input => input.value = "");
+      resultNumber.textContent = 0;
+      resultText.textContent = "--";
+      circle.style.background =
+        "linear-gradient(to bottom, hsla(256, 72%, 46%, 1), hsla(241, 72%, 46%, 0))";
+    });
+
+  </script>
+
+</body>
+
+</html>
